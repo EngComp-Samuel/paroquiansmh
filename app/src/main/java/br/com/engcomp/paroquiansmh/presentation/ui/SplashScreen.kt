@@ -54,8 +54,7 @@ fun SplashScreen(navController: NavHostController) {
                 modifier = Modifier.size(200.dp, 200.dp).clip(shape = CircleShape))
             Text(
                 text = "Paróquia Nossa Senhora Mãe dos Homens",
-                fontWeight = FontWeight.Bold,
-                color = if (isSystemInDarkTheme()) primaryDark else primaryLight
+                fontWeight = FontWeight.Bold
             )
         }
     }
