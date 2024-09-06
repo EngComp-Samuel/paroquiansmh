@@ -1,17 +1,13 @@
-package br.com.engcomp.paroquiansmh.presentation.ui.screen
+package br.com.engcomp.paroquiansmh.presentation.ui.screen.projetos
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,7 +26,9 @@ import br.com.engcomp.paroquiansmh.presentation.navigation.NavigationHost
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BibliaScreen(navController: NavController){
+fun ProjetoCaritasScreen(navController: NavController){
+
+
 
     val padding: Dp = 30.dp
 
@@ -40,12 +38,12 @@ fun BibliaScreen(navController: NavController){
         right = 0.dp,
         bottom = padding,
     ).add(WindowInsets.navigationBars).asPaddingValues()
-    
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { 
-                    Text(text = "Bíblia Sagrada")
+                title = {
+                    Text(text = "Caritas")
                 },
                 navigationIcon = {
 
@@ -64,26 +62,21 @@ fun BibliaScreen(navController: NavController){
                 })
         },
         content = {
-            innerPadding->
-                Column(modifier = Modifier.padding(innerPadding), verticalArrangement = Arrangement.spacedBy(16.dp)){
-                    Text(
-                        modifier = Modifier.padding(8.dp),
-                        text =
-                        """
+                innerPadding->
+            Column(modifier = Modifier.padding(innerPadding), verticalArrangement = Arrangement.spacedBy(16.dp)){
+                Text(
+                    modifier = Modifier.padding(8.dp),
+                    text =
+                    """
                     This is an example of a scaffold. It uses the Scaffold composable's parameters to create a screen with a simple top app bar, bottom app bar, and floating action button.
 
                     It also contains some basic inner content, such as this text.
 
                     You have pressed the floating action button times.
                 """.trimIndent(),
-                    )
-                }
+                )
+            }
         }
     )
+
 }
-
-
-
-
-
-

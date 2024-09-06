@@ -1,4 +1,4 @@
-package br.com.engcomp.paroquiansmh.presentation.ui.screen.projetos
+package br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,9 +26,7 @@ import br.com.engcomp.paroquiansmh.presentation.navigation.NavigationHost
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProjetoCaritas(navController: NavController){
-
-
+fun BibliaScreen(navController: NavController){
 
     val padding: Dp = 30.dp
 
@@ -38,12 +36,12 @@ fun ProjetoCaritas(navController: NavController){
         right = 0.dp,
         bottom = padding,
     ).add(WindowInsets.navigationBars).asPaddingValues()
-
+    
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(text = "Caritas")
+                title = { 
+                    Text(text = "Bíblia Sagrada")
                 },
                 navigationIcon = {
 
@@ -62,21 +60,26 @@ fun ProjetoCaritas(navController: NavController){
                 })
         },
         content = {
-                innerPadding->
-            Column(modifier = Modifier.padding(innerPadding), verticalArrangement = Arrangement.spacedBy(16.dp)){
-                Text(
-                    modifier = Modifier.padding(8.dp),
-                    text =
-                    """
+            innerPadding->
+                Column(modifier = Modifier.padding(innerPadding), verticalArrangement = Arrangement.spacedBy(16.dp)){
+                    Text(
+                        modifier = Modifier.padding(8.dp),
+                        text =
+                        """
                     This is an example of a scaffold. It uses the Scaffold composable's parameters to create a screen with a simple top app bar, bottom app bar, and floating action button.
 
                     It also contains some basic inner content, such as this text.
 
                     You have pressed the floating action button times.
                 """.trimIndent(),
-                )
-            }
+                    )
+                }
         }
     )
-
 }
+
+
+
+
+
+

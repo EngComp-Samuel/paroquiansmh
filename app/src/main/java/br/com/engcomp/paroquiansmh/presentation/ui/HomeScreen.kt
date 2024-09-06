@@ -40,6 +40,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -58,16 +60,18 @@ fun HomeScreen(navController: NavController){
 
     val listaDeProjetos = listOf(
         CardProjeto(
-            id = 0, imagem = R.drawable.paroquia_imagem,
+            id = 0, imagem = R.drawable.caritas_vector_logo,
             descricaoImagem = "imagem da paroquia",
-            textoTituloProjeto = "Titulo do projeto",
-            textoResumoProjeto = "o projeto faz isso e isso mais",
+            textoTituloProjeto = "Caritas",
+            textoResumoProjeto = """
+                A Caritas Internacional é uma confederação de 165 organizações humanitárias da Igreja Católica que atua em mais de duzentos países.
+            """.trimIndent(),
             rotaDoProjeto = "projeto_caritas"),
         CardProjeto(
-            id = 0, imagem = R.drawable.paroquia_imagem,
+            id = 0, imagem = R.drawable.logo_segue_me,
             descricaoImagem = "imagem da paroquia",
-            textoTituloProjeto = "Titulo do projeto",
-            textoResumoProjeto = "o projeto faz isso e isso mais",
+            textoTituloProjeto = "Segue-me",
+            textoResumoProjeto = "O Segue-me é um movimento de espiritualidade e formação voltado para jovens e adolescente, a expressão SEGUE-ME é inspirada na vocação de Mateus.",
             rotaDoProjeto = "projeto_caritas"),
         CardProjeto(
             id = 0, imagem = R.drawable.paroquia_imagem,
@@ -233,7 +237,7 @@ fun ListaGrid(navController: NavController){
         contentPadding = PaddingValues(10.dp),
         modifier = Modifier
             .padding(10.dp)
-            .height(300.dp)
+            .height(280.dp)
 
     ){
         items(listaDeIcones.size){
@@ -267,15 +271,15 @@ fun CardProjetosItem(
                 topEnd = 30.dp
             )
         )
-        .fillMaxWidth(.5f)){
+        .size(width = 350.dp, height = 300.dp)){
 
         Row(modifier = Modifier.fillMaxWidth()){
             Image(
                 painter = painterResource(id = imagem),
-                contentScale = ContentScale.None,
+                contentScale = ContentScale.FillWidth,
                 contentDescription = descricao,
                 modifier = Modifier
-                    .size(width = 250.dp, height = 130.dp)
+                    .size(width = 350.dp, height = 130.dp)
                     .clip(
                         RoundedCornerShape(
                             bottomStart = 0.dp,
@@ -291,7 +295,8 @@ fun CardProjetosItem(
         Text(
             text = textoResumoProjeto,
             fontSize = AppTypography.labelSmall.fontSize,
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.fillMaxWidth().padding(5.dp),
+            lineHeight = AppTypography.labelSmall.lineHeight,
         )
         Button(onClick = {
             navController.navigate(rotaDoProjeto){

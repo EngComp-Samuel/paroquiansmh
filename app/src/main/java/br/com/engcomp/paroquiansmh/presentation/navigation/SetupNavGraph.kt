@@ -10,12 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import br.com.engcomp.paroquiansmh.presentation.ui.HomeScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.SplashScreen
-import br.com.engcomp.paroquiansmh.presentation.ui.screen.BibliaScreen
+import br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia.BibliaScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.doacoes.DoacoesScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.leituras.LeiturasScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.ministerios.MinisteriosScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.paroquia.ParoquiaScreen
-import br.com.engcomp.paroquiansmh.presentation.ui.screen.projetos.ProjetoCaritas
+import br.com.engcomp.paroquiansmh.presentation.ui.screen.projetos.ProjetoCaritasScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.sobre.SobreAppScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +51,7 @@ fun SetupNavGraph(navController: NavHostController, paddingValues: PaddingValues
 
         //rotas dos botoes de projetos
         composable(route = NavigationHost.ProjetoCaritas.route){
-            ProjetoCaritas(navController = navController)
+            ProjetoCaritasScreen(navController = navController)
         }
 
     }
