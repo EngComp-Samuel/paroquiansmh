@@ -27,18 +27,26 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -51,13 +59,15 @@ import br.com.engcomp.paroquiansmh.presentation.ui.componentes.PadraoBotao
 import br.com.engcomp.paroquiansmh.presentation.ui.componentes.PadraoCardItem
 import br.com.engcomp.paroquiansmh.presentation.ui.textos.TextoCorpo
 import br.com.engcomp.paroquiansmh.presentation.ui.textos.TextoTitulo
+import br.com.engcomp.paroquiansmh.presentation.ui.textos.TextosPersonalizados
+import br.com.engcomp.paroquiansmh.presentation.viewmodel.HomeViewModel
 import br.com.engcomp.paroquiansmh.ui.theme.AppTypography
+import br.com.engcomp.paroquiansmh.ui.theme.playFairDisplayFontFamily
 
 @ExperimentalMaterial3Api
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController){
-
+fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel){
     val listaDeProjetos = listOf(
         CardProjeto(
             id = 0, imagem = R.drawable.caritas_vector_logo,
@@ -77,7 +87,7 @@ fun HomeScreen(navController: NavController){
             id = 0, imagem = R.drawable.paroquia_imagem,
             descricaoImagem = "imagem da paroquia",
             textoTituloProjeto = "Titulo do projeto",
-            textoResumoProjeto = "o projeto faz isso e isso mais",
+            textoResumoProjeto = "O projeto faz isso e isso mais",
             rotaDoProjeto = "projeto_caritas")
     )
 
@@ -117,7 +127,8 @@ fun HomeScreen(navController: NavController){
                             )}
                             Column(horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.SpaceBetween) {
-                                TextoTitulo(texto = "Paróquia Nossa Senhora Mãe dos Homens")
+                                TextoTitulo(texto = "Paróquia", pesoFonte = FontWeight.Medium)
+                                TextoTitulo(texto = "Nossa Senhora Mãe dos Homens")
                                 TextoCorpo(texto = "João Câmara/RN")
                             }
 
@@ -126,14 +137,10 @@ fun HomeScreen(navController: NavController){
                 }
 
                 item{
-                    TextoCorpo(texto = "Bem-Vindo(a)")
-                    Text(
-                        text = "Mensagem aleatória sempre que abrir o app",
-                        fontSize = AppTypography.bodySmall.fontSize,
-                        modifier = Modifier.padding(5.dp).fillMaxWidth(),
-                        textAlign = TextAlign.Center)
+                    TextosPersonalizados(homeViewModel)
                     HorizontalDivider()
                 }
+
 
                 item {
                     ListaGrid(navController = navController)
@@ -143,7 +150,6 @@ fun HomeScreen(navController: NavController){
                     TextoCorpo(texto = "Projetos")
                     HorizontalDivider()
                 }
-
 
                 item{
                     LazyRow{
@@ -261,7 +267,10 @@ fun CardProjetosItem(
     rotaDoProjeto: String,
     navController: NavController
 ){
-    Card(modifier = Modifier
+    Card(elevation = CardDefaults.elevatedCardElevation(
+        defaultElevation = 5.dp,
+        pressedElevation = 0.dp
+    ),modifier = Modifier
         .padding(8.dp)
         .clip(
             RoundedCornerShape(
@@ -295,8 +304,12 @@ fun CardProjetosItem(
         Text(
             text = textoResumoProjeto,
             fontSize = AppTypography.labelSmall.fontSize,
-            modifier = Modifier.fillMaxWidth().padding(5.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
             lineHeight = AppTypography.labelSmall.lineHeight,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
         )
         Button(onClick = {
             navController.navigate(rotaDoProjeto){
@@ -309,3 +322,5 @@ fun CardProjetosItem(
         }
     }
 }
+
+

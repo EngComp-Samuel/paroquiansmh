@@ -6,16 +6,21 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 
 import br.com.engcomp.paroquiansmh.presentation.navigation.SetupNavGraph
+import br.com.engcomp.paroquiansmh.presentation.viewmodel.HomeViewModel
 
 
 //essa lib ainda esta na versao beta
 //import androidx.compose.material3.adaptive.navigationsuite
 
 @Composable
-fun MainScreen() {
+fun MainScreen(homeViewModel: HomeViewModel) {
     val navController = rememberNavController()
     Scaffold{
-        paddingValues ->  SetupNavGraph(navController = navController, paddingValues = paddingValues)
+        paddingValues ->
+            SetupNavGraph(
+                navController = navController,
+                paddingValues = paddingValues,
+                homeViewModel = homeViewModel)
     }
 }
 

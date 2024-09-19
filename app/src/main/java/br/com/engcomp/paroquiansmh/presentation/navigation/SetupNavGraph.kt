@@ -6,21 +6,25 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import br.com.engcomp.paroquiansmh.presentation.ui.HomeScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.SplashScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia.BibliaScreen
+import br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia.LivroScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.doacoes.DoacoesScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.leituras.LeiturasScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.ministerios.MinisteriosScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.paroquia.ParoquiaScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.projetos.ProjetoCaritasScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.sobre.SobreAppScreen
+import br.com.engcomp.paroquiansmh.presentation.viewmodel.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetupNavGraph(navController: NavHostController, paddingValues: PaddingValues){
+fun SetupNavGraph(navController: NavHostController, paddingValues: PaddingValues,homeViewModel: HomeViewModel){
 
     NavHost(navController = navController, startDestination = NavigationHost.Splash.route){
 
@@ -28,10 +32,10 @@ fun SetupNavGraph(navController: NavHostController, paddingValues: PaddingValues
             SplashScreen(navController = navController)
         }
         composable(route = NavigationHost.Home.route){
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, homeViewModel = homeViewModel)
         }
         composable(route = NavigationHost.Biblia.route){
-            BibliaScreen(navController = navController)
+            BibliaScreen(navController = navController, homeViewModel = homeViewModel)
         }
         composable(route = NavigationHost.Ministerios.route){
             MinisteriosScreen(navController = navController)
@@ -47,6 +51,21 @@ fun SetupNavGraph(navController: NavHostController, paddingValues: PaddingValues
         }
         composable(route = NavigationHost.Paroquia.route){
             ParoquiaScreen(navController = navController)
+        }
+
+        //rotas dos livros da biblia
+        //TODO: VER UMA FORMA DE ENVIAR ARGUMENTOS OU FLAGS
+        composable(route = NavigationHost.Livro.route+"/{nomeLivro}", arguments = listOf(
+            navArgument("nomeLivro"){
+                type = NavType.StringType
+                defaultValue = ""
+                nullable = true
+            }
+        )){
+            LivroScreen(
+                navController = navController,
+                homeViewModel = homeViewModel,
+            tituloLivro = it.arguments?.getString("nomeLivro")?:"")
         }
 
         //rotas dos botoes de projetos

@@ -218,6 +218,7 @@ val surfaceContainerDarkHighContrast = Color(0xFF221F17)
 val surfaceContainerHighDarkHighContrast = Color(0xFF2D2A21)
 val surfaceContainerHighestDarkHighContrast = Color(0xFF38342B)
 
+val corBackGroundSplashScreen = Color(0xFF8D939F)
 
 
 
