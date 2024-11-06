@@ -1,6 +1,8 @@
 package br.com.engcomp.paroquiansmh.presentation.ui.screen.sobre
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -8,7 +10,10 @@ import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -61,18 +66,24 @@ fun SobreAppScreen(navController: NavController){
         },
         content = {
                 innerPadding->
-            Column(modifier = Modifier.padding(innerPadding), verticalArrangement = Arrangement.spacedBy(16.dp)){
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(16.dp)){
+
                 Text(
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier.padding(10.dp),
                     text =
                     """
-                    This is an example of a scaffold. It uses the Scaffold composable's parameters to create a screen with a simple top app bar, bottom app bar, and floating action button.
-
-                    It also contains some basic inner content, such as this text.
-
-                    You have pressed the floating action button times.
+                    Olá, este App foi desenvolvido em parceria com a paróquia Nossa Senhora Mãe dos Homens, com intuito de ajudar os membros da comunidade a se manterem com a palavra de Deus em mãos.
+                    
+                    Neste App é possível acessar uma Bíblia, salvar suas leituras, compartilhar com outros fiés a palavra de Deus, é possível conhecer um pouco mais sobre os projetos no qual a paróquia está atuando.
+                    
+                    Além disso, ainda é possível realizar doações para ajudar a igreja a continuar seus projetos de caridade.
                 """.trimIndent(),
                 )
+                HorizontalDivider()
             }
         }
     )

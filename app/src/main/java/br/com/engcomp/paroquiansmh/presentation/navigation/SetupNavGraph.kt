@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import br.com.engcomp.paroquiansmh.presentation.ui.HomeScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.SplashScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia.BibliaScreen
+import br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia.CapituloScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.biblia.LivroScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.doacoes.DoacoesScreen
 import br.com.engcomp.paroquiansmh.presentation.ui.screen.leituras.LeiturasScreen
@@ -55,18 +56,53 @@ fun SetupNavGraph(navController: NavHostController, paddingValues: PaddingValues
 
         //rotas dos livros da biblia
         //TODO: VER UMA FORMA DE ENVIAR ARGUMENTOS OU FLAGS
-        composable(route = NavigationHost.Livro.route+"/{nomeLivro}", arguments = listOf(
+        composable(route = NavigationHost.Livro.route+"/{nomeLivro}/{antigoNovoTestamento}", arguments = listOf(
             navArgument("nomeLivro"){
                 type = NavType.StringType
                 defaultValue = ""
                 nullable = true
+            },
+            navArgument("antigoNovoTestamento"){
+                type = NavType.IntType
+                defaultValue = 0
+                nullable = false
             }
         )){
             LivroScreen(
                 navController = navController,
                 homeViewModel = homeViewModel,
-            tituloLivro = it.arguments?.getString("nomeLivro")?:"")
+            tituloLivro = it.arguments?.getString("nomeLivro")?:"",
+                antigoOuNovoTestamento = it.arguments?.getInt("antigoNovoTestamento")?:0)
         }
+
+        composable(
+            route = NavigationHost.Capitulo.route+"/{capituloTitulo}/{capitulo}/{testamento}",
+            arguments = listOf(
+                navArgument("capituloTitulo"){
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = true
+                },
+                navArgument("capitulo"){
+                    type = NavType.IntType
+                    defaultValue = 0
+                    nullable = false
+                },
+                navArgument("testamento"){
+                    type = NavType.IntType
+                    defaultValue = 0
+                    nullable = false
+                }
+        )){
+            CapituloScreen(
+                capituloTitulo = it.arguments?.getString("capituloTitulo")?:"",
+                capitulo = it.arguments?.getInt("capitulo")?:0,
+                testamento = it.arguments?.getInt("testamento")?:0,
+                navController = navController,
+                homeViewModel = homeViewModel
+            )
+        }
+
 
         //rotas dos botoes de projetos
         composable(route = NavigationHost.ProjetoCaritas.route){

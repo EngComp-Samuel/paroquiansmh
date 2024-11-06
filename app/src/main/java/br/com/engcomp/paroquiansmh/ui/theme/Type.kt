@@ -20,14 +20,14 @@ val provider = GoogleFont.Provider(
 
 val bodyFontFamily = FontFamily(
     Font(
-        googleFont = GoogleFont("Roboto"),
+        googleFont = GoogleFont("Roboto Slab"),
         fontProvider = provider,
     )
 )
 
 val displayFontFamily = FontFamily(
     Font(
-        googleFont = GoogleFont("Roboto"),
+        googleFont = GoogleFont("Roboto Slab"),
         fontProvider = provider,
     )
 )
@@ -52,24 +52,6 @@ val AppTypography = Typography(
     labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
     labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
 )
-
-val playFairDisplayFontFamily = FontFamily(
-    Font(R.font.playfairdisplay_black, FontWeight.Black),
-    Font(R.font.playfairdisplay_blackitalic, FontWeight.Black),
-    Font(R.font.playfairdisplay_bold, FontWeight.Bold),
-    Font(R.font.playfairdisplay_bolditalic, FontWeight.Bold),
-    Font(R.font.playfairdisplay_extrabold, FontWeight.ExtraBold),
-    Font(R.font.playfairdisplay_extrabolditalic, FontWeight.ExtraBold),
-    Font(R.font.playfairdisplay_italic, FontWeight.Normal),
-    Font(R.font.playfairdisplay_italic_variablefont_wght, FontWeight.Normal),
-    Font(R.font.playfairdisplay_medium, FontWeight.Medium),
-    Font(R.font.playfairdisplay_mediumitalic, FontWeight.Medium),
-    Font(R.font.playfairdisplay_regular, FontWeight.Normal),
-    Font(R.font.playfairdisplay_semibold, FontWeight.SemiBold),
-    Font(R.font.playfairdisplay_semibolditalic, FontWeight.SemiBold),
-    Font(R.font.playfairdisplay_variablefont_wght, FontWeight.Normal)
-)
-
 
 
 

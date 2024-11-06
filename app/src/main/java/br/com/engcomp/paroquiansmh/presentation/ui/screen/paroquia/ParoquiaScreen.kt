@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -61,16 +63,57 @@ fun ParoquiaScreen(navController: NavController){
         },
         content = {
                 innerPadding->
-            Column(modifier = Modifier.padding(innerPadding), verticalArrangement = Arrangement.spacedBy(16.dp)){
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ){
                 Text(
                     modifier = Modifier.padding(8.dp),
                     text =
                     """
-                    This is an example of a scaffold. It uses the Scaffold composable's parameters to create a screen with a simple top app bar, bottom app bar, and floating action button.
+                    Praça Mons. Freitas, 188 
 
-                    It also contains some basic inner content, such as this text.
+Centro - 59550-000 - João Câmara - RN
+Telefone: (84) 99653-2647
+E-mail: pnsmhomens01@gmail.com
 
-                    You have pressed the floating action button times.
+
+Pároco: Pe. Josino Raimundo da Silva
+
+Vigários Paroquiais:  Pe. Pedro da Cunha Júnio, Pe. Wagner Martins e Pe. João Eudes de Souza Lopes
+
+
+Redes sociais
+
+Instagram - @paroquiamaedoshomens
+
+www.facebook.com/paroquiajoaocamara/
+
+Youtube – TV Mãe dos Homens
+
+
+Horários de Missas
+Igreja Matriz de Nossa Senhora Mãe dos Homens
+Domingo - 7h, 10h e 19h
+
+Terça a sexta - 17h30
+
+Sábado - 10h (missa dos feirantes)
+ 1ª sexta do mês - 7h
+
+3ª quinta do mês - 19h
+
+ Igreja de São João Batista - Jardim de Angicos
+ Domingo - 19h
+
+1º sexta do mês - 19h
+
+
+Municípios que abrange: João Câmara, Bento Fernandes e Jardim de Angicos.
+
+Data de criação: 13/11/1929
                 """.trimIndent(),
                 )
             }

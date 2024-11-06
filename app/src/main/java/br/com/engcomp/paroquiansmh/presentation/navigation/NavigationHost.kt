@@ -25,6 +25,7 @@ sealed class NavigationHost(val route: String) {
     object Paroquia: NavigationHost("paroquia")
 
     object Livro: NavigationHost("livro-screen")
+    object Capitulo: NavigationHost("capitulo-screen")
 
     //rotas dos botoes de projetos
     object ProjetoCaritas: NavigationHost("projeto_caritas")

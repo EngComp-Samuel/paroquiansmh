@@ -8,5 +8,7 @@ data class BibliaDTO(
     val nome: String,
 
     @SerializedName("Capitulo")
-    val capitulo: List<String>
+    val capitulo: List<String>,
+
+    val isSelect: Boolean
 )

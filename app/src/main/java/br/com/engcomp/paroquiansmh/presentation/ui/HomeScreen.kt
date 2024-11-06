@@ -1,6 +1,8 @@
 package br.com.engcomp.paroquiansmh.presentation.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,16 +30,17 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Facebook
+import androidx.compose.material.icons.filled.YoutubeSearchedFor
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,51 +48,37 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.engcomp.paroquiansmh.R
 import br.com.engcomp.paroquiansmh.presentation.ui.componentes.CardProjeto
-import br.com.engcomp.paroquiansmh.presentation.ui.componentes.PadraoBotao
 import br.com.engcomp.paroquiansmh.presentation.ui.componentes.PadraoCardItem
-import br.com.engcomp.paroquiansmh.presentation.ui.textos.TextoCorpo
-import br.com.engcomp.paroquiansmh.presentation.ui.textos.TextoTitulo
+
 import br.com.engcomp.paroquiansmh.presentation.ui.textos.TextosPersonalizados
 import br.com.engcomp.paroquiansmh.presentation.viewmodel.HomeViewModel
 import br.com.engcomp.paroquiansmh.ui.theme.AppTypography
-import br.com.engcomp.paroquiansmh.ui.theme.playFairDisplayFontFamily
+
 
 @ExperimentalMaterial3Api
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel){
-    val listaDeProjetos = listOf(
-        CardProjeto(
-            id = 0, imagem = R.drawable.caritas_vector_logo,
-            descricaoImagem = "imagem da paroquia",
-            textoTituloProjeto = "Caritas",
-            textoResumoProjeto = """
-                A Caritas Internacional é uma confederação de 165 organizações humanitárias da Igreja Católica que atua em mais de duzentos países.
-            """.trimIndent(),
-            rotaDoProjeto = "projeto_caritas"),
-        CardProjeto(
-            id = 0, imagem = R.drawable.logo_segue_me,
-            descricaoImagem = "imagem da paroquia",
-            textoTituloProjeto = "Segue-me",
-            textoResumoProjeto = "O Segue-me é um movimento de espiritualidade e formação voltado para jovens e adolescente, a expressão SEGUE-ME é inspirada na vocação de Mateus.",
-            rotaDoProjeto = "projeto_caritas"),
-        CardProjeto(
-            id = 0, imagem = R.drawable.paroquia_imagem,
-            descricaoImagem = "imagem da paroquia",
-            textoTituloProjeto = "Titulo do projeto",
-            textoResumoProjeto = "O projeto faz isso e isso mais",
-            rotaDoProjeto = "projeto_caritas")
-    )
+
+    val linkFacebook = "https://www.facebook.com/paroquiajoaocamara/"
+    val intentFacebook = Intent(Intent.ACTION_VIEW, Uri.parse(linkFacebook))
+
+    val linkInstagram = "https://www.instagram.com/paroquiamaedoshomens/"
+    val intentInstagram = Intent(Intent.ACTION_VIEW, Uri.parse(linkInstagram))
+
+    val linkYoutube = "https://www.youtube.com/channel/UCvoLk4gQHLWz-3k2drX_53w"
+    val intentYoutube = Intent(Intent.ACTION_VIEW, Uri.parse(linkYoutube))
+
+    val context = LocalContext.current
+
 
     val padding: Dp = 30.dp
 
@@ -101,37 +90,55 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel){
     ).add(WindowInsets.navigationBars).asPaddingValues()
 
     val orientacaoTela = LocalConfiguration.current.orientation
+    val listaDeProjetos = homeViewModel.cardsTelaHome()
 
-    LazyColumn(
-                modifier = Modifier.
-                    fillMaxSize(), contentPadding = contentPadding)
-            {
+
+    LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
                 item{
                     Row {
-
                         Box(contentAlignment = Alignment.Center){
                             if (orientacaoTela == 1){
-                            Image(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clip(
-                                        RoundedCornerShape(
-                                            bottomStart = 80.dp,
-                                            bottomEnd = 80.dp
-                                        )
-                                    ),
-                                painter = painterResource(id = R.drawable.paroquia_imagem),
-                                contentDescription = "Imagem da paroquia de jc",
-                                alpha = .15f,
-                                contentScale = ContentScale.Inside
-                            )}
-                            Column(horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.SpaceBetween) {
-                                TextoTitulo(texto = "Paróquia", pesoFonte = FontWeight.Medium)
-                                TextoTitulo(texto = "Nossa Senhora Mãe dos Homens")
-                                TextoCorpo(texto = "João Câmara/RN")
+                                Image(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clip(
+                                            RoundedCornerShape(
+                                                bottomStart = 80.dp,
+                                                bottomEnd = 80.dp
+                                            )
+                                        ),
+                                    painter = painterResource(id = R.drawable.paroquia_imagem),
+                                    contentDescription = "Imagem da paroquia de jc",
+                                    alpha = .15f,
+                                    contentScale = ContentScale.Inside
+                                )
                             }
+                            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = "Paróquia",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(10.dp),
+                                    textAlign = TextAlign.Center)
 
+                                Text(
+                                    text = "Nossa Senhora Mãe dos Homens",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(10.dp),
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    textAlign = TextAlign.Center,
+                                    fontWeight = FontWeight.Bold)
+
+                                Text(
+                                    text = "João Câmara/RN",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(10.dp),
+                                    textAlign = TextAlign.Center)
+                            }
                         }
                     }
                 }
@@ -141,13 +148,46 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel){
                     HorizontalDivider()
                 }
 
-
                 item {
-                    ListaGrid(navController = navController)
+                    ListaGrid(navController = navController, homeViewModel = homeViewModel)
                 }
 
+        item{
+            Text(text = "Redes sociais",
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+            HorizontalDivider()
+            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()){
+                IconButton(
+                    onClick = {context.startActivity(intentFacebook)}
+                ) {
+                    Image(painter = painterResource(id = R.drawable.img_facebook), contentDescription = "")
+                }
+                IconButton(
+                    onClick = { context.startActivity(intentInstagram) }
+                ) {
+                    Image(painter = painterResource(id = R.drawable.icon_instagram), contentDescription = "")
+                }
+                IconButton(
+                    onClick = { context.startActivity(intentYoutube) }
+                ) {
+                    Image(painter = painterResource(id = R.drawable.icon_youtube), contentDescription = "")
+                }
+            }
+        }
+
                 item{
-                    TextoCorpo(texto = "Projetos")
+                    Text(text = "Projetos",
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold
+                    )
                     HorizontalDivider()
                 }
 
@@ -170,81 +210,17 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel){
 
 
 @Composable
-fun ListaGrid(navController: NavController){
+fun ListaGrid(navController: NavController, homeViewModel: HomeViewModel){
 
-    val listaDeIcones = listOf(
-        PadraoBotao(
-            id = 0,
-            texto = "Bíblia",
-            icone = R.drawable.icon_book,
-            descricao = "botao biblia",
-            rota = "biblia"
-        ),
-        PadraoBotao(
-            id = 1,
-            texto = "Ministérios",
-            icone = R.drawable.icon_ministerios,
-            descricao = "botao ministerios",
-            rota = "ministerios"
-        ),
-        PadraoBotao(
-            id = 2,
-            texto = "Leituras",
-            icone = R.drawable.icon_leituras,
-            descricao = "botao leituras",
-            rota = "leituras"
-        ),
-        PadraoBotao(
-            id = 3,
-            texto = "Doações",
-            icone = R.drawable.icon_doacao,
-            descricao = "botao doacoes",
-            rota = "doacoes"
-        ),
-        PadraoBotao(
-            id = 4,
-            texto = "teste",
-            icone = R.drawable.baseline_notifications_24,
-            descricao = "teste",
-            rota = "teste"
-        ),
-        PadraoBotao(
-            id = 5,
-            texto = "teste",
-            icone = R.drawable.baseline_notifications_24,
-            descricao = "teste",
-            rota = "teste"
-        ),
-        PadraoBotao(
-            id = 6,
-            texto = "teste",
-            icone = R.drawable.baseline_notifications_24,
-            descricao = "teste",
-            rota = "teste"
-        ),
-        PadraoBotao(
-            id = 7,
-            texto = "Paróquia",
-            icone = R.drawable.icon_igreja,
-            descricao = "teste",
-            rota = "paroquia"
-        ),
-        PadraoBotao(
-            id = 8,
-            texto = "Sobre o app",
-            icone = R.drawable.icon_info,
-            descricao = "botao sobre o app",
-            rota = "sobre_app"
-        )
-    )
+    val orientacaoTela = LocalConfiguration.current.orientation
+    val listaDeIcones = homeViewModel.botoesTelaHome()
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
+        columns = if(orientacaoTela == 1 ){GridCells.Fixed(3)}else{GridCells.Fixed(5)},
         contentPadding = PaddingValues(10.dp),
         modifier = Modifier
             .padding(10.dp)
-            .height(280.dp)
-
+            .height(250.dp)
     ){
         items(listaDeIcones.size){
                 index ->
@@ -280,7 +256,7 @@ fun CardProjetosItem(
                 topEnd = 30.dp
             )
         )
-        .size(width = 350.dp, height = 300.dp)){
+        .size(width = 250.dp, height = 300.dp)){
 
         Row(modifier = Modifier.fillMaxWidth()){
             Image(
@@ -300,14 +276,19 @@ fun CardProjetosItem(
             )
         }
 
-        TextoCorpo(texto = textoTituloProjeto)
+        Text(
+            text = textoTituloProjeto,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            textAlign = TextAlign.Center
+        )
         Text(
             text = textoResumoProjeto,
-            fontSize = AppTypography.labelSmall.fontSize,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            lineHeight = AppTypography.labelSmall.lineHeight,
+            style = MaterialTheme.typography.labelSmall,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )

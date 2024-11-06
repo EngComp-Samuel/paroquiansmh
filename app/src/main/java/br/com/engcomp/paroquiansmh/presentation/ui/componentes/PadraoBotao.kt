@@ -1,6 +1,5 @@
 package br.com.engcomp.paroquiansmh.presentation.ui.componentes
 
-
 data class PadraoBotao(
     val id: Int,
     val texto: String,
